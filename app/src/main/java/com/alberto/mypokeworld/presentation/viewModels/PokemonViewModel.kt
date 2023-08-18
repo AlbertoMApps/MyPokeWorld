@@ -14,6 +14,9 @@ class PokemonViewModel @Inject constructor(
     private val _pokemonState = mutableStateOf(PokemonViewState())
     val pokemonViewState = _pokemonState
 
+    private val _specieState = mutableStateOf(SpecieViewState())
+    val specieViewState = _specieState
+
     fun getPokemon(pokeId: String) {
         pokemonRepositoryService.getPokemon(pokeId)
             .subscribe({
@@ -25,6 +28,21 @@ class PokemonViewModel @Inject constructor(
                 _pokemonState.value = PokemonViewState(
                     isLoading = false,
                     errorMessage = it.message ?: "An error occurred loading your pokemon"
+                )
+            })
+    }
+
+    fun getSpecie(pokeId: String) {
+        pokemonRepositoryService.getSpecie(pokeId)
+            .subscribe({
+                _specieState.value = SpecieViewState(
+                    isLoading = false,
+                    data = it
+                )
+            }, {
+                _specieState.value = SpecieViewState(
+                    isLoading = false,
+                    errorMessage = it.message ?: "An error occurred loading your specie"
                 )
             })
     }

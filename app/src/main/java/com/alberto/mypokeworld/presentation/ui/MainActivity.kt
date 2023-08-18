@@ -3,6 +3,7 @@ package com.alberto.mypokeworld.presentation.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting()
+                    MyPokedexScreen()
                 }
             }
         }
@@ -34,15 +35,22 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(
+fun MyPokedexScreen(
     viewModel: PokemonViewModel = hiltViewModel()
 ) {
     viewModel.getPokemon("1")
+    viewModel.getSpecie("1")
     val pokemon = viewModel.pokemonViewState.value.data
+    val specie = viewModel.specieViewState.value.data
 
-    Text(
-        text = "Hello ${pokemon?.name}"
-    )
+    Column {
+        Text(
+            text = "Hello ${pokemon?.name}"
+        )
+        Text(
+            text = specie?.flavorTextEntries?.get(0)?.flavorText.toString()
+        )
+    }
 
 }
 
@@ -50,6 +58,6 @@ fun Greeting(
 @Composable
 fun GreetingPreview() {
     MyPokeWorldTheme {
-        Greeting()
+        MyPokedexScreen()
     }
 }

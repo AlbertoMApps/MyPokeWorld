@@ -13,6 +13,6 @@ interface PokeApi {
     fun getPokemon(@Path("id") id: String? = null): Observable<Pokemon>
 
     @GET(POKE_SPECIE_API_FEED)
-    fun getSpecies(@Path("id") id: String? = null): Observable<Specie>
+    fun getSpecie(@Path("id") id: String? = null): Observable<Specie>
 
 }

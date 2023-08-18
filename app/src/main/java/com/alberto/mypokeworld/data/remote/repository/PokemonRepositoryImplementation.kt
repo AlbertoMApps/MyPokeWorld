@@ -2,6 +2,7 @@ package com.alberto.mypokeworld.data.remote.repository
 
 import com.alberto.mypokeworld.data.remote.api.PokeApi
 import com.alberto.mypokeworld.data.remote.model.Pokemon
+import com.alberto.mypokeworld.data.remote.model.Specie
 import com.alberto.mypokeworld.domain.PokemonRepositoryService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -16,6 +17,13 @@ class PokemonRepositoryImplementation @Inject constructor(
         pokeId: String
     ): Observable<Pokemon> =
         pokeApi.getPokemon(pokeId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    override fun getSpecie(
+        pokeId: String
+    ): Observable<Specie> =
+        pokeApi.getSpecie(pokeId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
