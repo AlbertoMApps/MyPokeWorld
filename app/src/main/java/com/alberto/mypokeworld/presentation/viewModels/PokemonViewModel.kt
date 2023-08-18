@@ -19,6 +19,12 @@ class PokemonViewModel @Inject constructor(
 
     fun getPokemon(pokeId: String) {
         pokemonRepositoryService.getPokemon(pokeId)
+            .doOnNext {
+                _pokemonState.value = PokemonViewState(
+                    isLoading = true,
+                    data = it
+                )
+            }
             .subscribe({
                 _pokemonState.value = PokemonViewState(
                     isLoading = false,
@@ -34,6 +40,12 @@ class PokemonViewModel @Inject constructor(
 
     fun getSpecie(pokeId: String) {
         pokemonRepositoryService.getSpecie(pokeId)
+            .doOnNext {
+                _specieState.value = SpecieViewState(
+                    isLoading = true,
+                    data = it
+                )
+            }
             .subscribe({
                 _specieState.value = SpecieViewState(
                     isLoading = false,
