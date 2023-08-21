@@ -1,5 +1,6 @@
 package com.alberto.mypokeworld.presentation.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,13 +52,13 @@ fun PokemonUncoveredCardScreen(
             contentDescription = null,
             error = painterResource(id = R.drawable.ic_launcher_background),
             modifier = Modifier
-                .padding(bottom = 8.dp)
+                .padding(all = 8.dp)
                 .size(300.dp)
                 .clip(RoundedCornerShape(8.dp))
         )
         Text(
-            text = "Hello ${pokemon?.name}",
-            style = MaterialTheme.typography.subtitle1.copy(
+            text = (pokemon?.name ?: "No name loaded").uppercase(),
+            style = MaterialTheme.typography.h3.copy(
                 fontWeight = FontWeight.ExtraBold
             ),
             color = MaterialTheme.colors.primary,
@@ -66,10 +67,8 @@ fun PokemonUncoveredCardScreen(
         )
         Text(
             text = specie?.flavorTextEntries?.get(0)?.flavorText.toString(),
-            style = MaterialTheme.typography.body1.copy(
-                fontWeight = FontWeight.ExtraBold
-            ),
-            color = MaterialTheme.colors.primary,
+            style = MaterialTheme.typography.body1,
+            color = MaterialTheme.colors.secondary,
             textAlign = TextAlign.Start,
         )
     }
@@ -84,7 +83,7 @@ fun PokemonCoveredScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        AsyncImage(
+        Image(
             painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null,
             modifier = Modifier

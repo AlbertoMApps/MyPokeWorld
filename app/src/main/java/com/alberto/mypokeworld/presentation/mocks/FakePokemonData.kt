@@ -6,7 +6,7 @@ import com.alberto.mypokeworld.data.remote.model.PokemonSprites
 import com.alberto.mypokeworld.data.remote.model.Specie
 
 val fakePokemon = Pokemon(
-    id = 1000,
+    id = 10,
     name = "Gholdengo",
     baseExperience = 100,
     height = 10,
@@ -15,6 +15,7 @@ val fakePokemon = Pokemon(
 )
 
 val fakeSpecie = Specie(
+    10,
     isBaby = "No",
     isLegendary = "No",
     flavorTextEntries = listOf(FlavorTextEntry("Text of the entry for this pokemon"))

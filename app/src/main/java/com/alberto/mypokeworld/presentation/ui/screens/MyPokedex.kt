@@ -3,6 +3,9 @@ package com.alberto.mypokeworld.presentation.ui.screens
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
@@ -52,14 +55,21 @@ private fun MyPokedexScreen(
         exit = slideOutVertically()
     ) {
         LazyColumn(
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .padding(vertical = 4.dp)
         ) {
-            items(user.level * 10) { index: Int ->
+            items(user.level * 10) { pokemonIndex: Int ->
                 Card(
-                    backgroundColor = MaterialTheme.colors.onPrimary,
+                    backgroundColor = MaterialTheme.colors.background,
                     elevation = 4.dp
                 ) {
-                    PokemonCardContent(user.pokemonList[index - 1], user.specieList[index - 1])
+                    Column(modifier = Modifier.padding(10.dp)) {
+                        val pokemon = user.pokemonList.find { it.id == pokemonIndex + 1 }
+                        val specie = user.specieList.find { it.id == pokemonIndex + 1 }
+                        PokemonCardContent(pokemon, specie)
+                    }
                 }
             }
         }

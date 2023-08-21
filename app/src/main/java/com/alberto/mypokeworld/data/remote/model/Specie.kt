@@ -3,6 +3,7 @@ package com.alberto.mypokeworld.data.remote.model
 import com.google.gson.annotations.SerializedName
 
 class Specie(
+    val id: Int,
     @SerializedName("is_baby")
     val isBaby: String,
     @SerializedName("is_legendary")
