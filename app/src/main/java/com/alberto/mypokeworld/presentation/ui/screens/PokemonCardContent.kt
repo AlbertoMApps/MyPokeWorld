@@ -22,7 +22,23 @@ import com.alberto.mypokeworld.data.remote.model.Pokemon
 import com.alberto.mypokeworld.data.remote.model.Specie
 
 @Composable
-fun PokemonCardContent(pokemon: Pokemon?, specie: Specie?) {
+fun PokemonCardContent(
+    pokemon: Pokemon?,
+    specie: Specie?
+) {
+    if (pokemon != null && specie != null) {
+        PokemonUncoveredCardScreen(pokemon = pokemon, specie = specie)
+    } else {
+        PokemonCoveredScreen()
+    }
+}
+
+
+@Composable
+fun PokemonUncoveredCardScreen(
+    pokemon: Pokemon?,
+    specie: Specie?
+) {
     Column(
         modifier = Modifier
             .padding(12.dp)
@@ -55,6 +71,26 @@ fun PokemonCardContent(pokemon: Pokemon?, specie: Specie?) {
             ),
             color = MaterialTheme.colors.primary,
             textAlign = TextAlign.Start,
+        )
+    }
+}
+
+@Composable
+fun PokemonCoveredScreen() {
+    Column(
+        modifier = Modifier
+            .padding(12.dp)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        AsyncImage(
+            painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .size(300.dp)
+                .clip(RoundedCornerShape(8.dp))
         )
     }
 }
