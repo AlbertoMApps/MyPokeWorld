@@ -1,6 +1,7 @@
-package com.alberto.mypokeworld.presentation.ui.screens
+package com.alberto.mypokeworld.presentation.ui.screens.homeScreen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -43,7 +45,8 @@ fun PokemonUncoveredCardScreen(
     Column(
         modifier = Modifier
             .padding(12.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .background(Color.LightGray),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -52,7 +55,6 @@ fun PokemonUncoveredCardScreen(
             contentDescription = null,
             error = painterResource(id = R.drawable.ic_launcher_background),
             modifier = Modifier
-                .padding(all = 8.dp)
                 .size(300.dp)
                 .clip(RoundedCornerShape(8.dp))
         )
@@ -69,7 +71,8 @@ fun PokemonUncoveredCardScreen(
             text = specie?.flavorTextEntries?.get(0)?.flavorText.toString(),
             style = MaterialTheme.typography.body1,
             color = MaterialTheme.colors.secondary,
-            textAlign = TextAlign.Start,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(bottom = 8.dp)
         )
     }
 }

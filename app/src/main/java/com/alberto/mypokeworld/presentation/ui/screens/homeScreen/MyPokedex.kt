@@ -1,4 +1,4 @@
-package com.alberto.mypokeworld.presentation.ui.screens
+package com.alberto.mypokeworld.presentation.ui.screens.homeScreen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
