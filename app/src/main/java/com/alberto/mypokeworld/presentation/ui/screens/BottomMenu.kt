@@ -63,8 +63,12 @@ fun BottomMenu(
                         onNavigateToPokeGame
                     }
 
-                    else -> {
+                    2 -> {
                         onNavigateToGetPokemon
+                    }
+
+                    else -> {
+                        onNavigateToPokedex
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.alberto.mypokeworld.presentation.ui.screens.homeScreen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,12 +37,16 @@ fun HomeScreen() {
                 .align(Alignment.BottomCenter),
             onNavigateToPokedex = {
                 //navigate to MyPokedex
+                Log.DEBUG
             },
             onNavigateToPokeGame = {
                 //navigate to Pokegame
+                Log.DEBUG
+
             },
             onNavigateToGetPokemon = {
                 //navigate to Get Pokemon
+                Log.DEBUG
             }
         )
     }
