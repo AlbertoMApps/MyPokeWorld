@@ -1,119 +1,62 @@
 package com.alberto.mypokeworld.presentation.ui.screens
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun BottomMenu(
-    items: List<BottomMenuContent>,
-    modifier: Modifier = Modifier,
-    activeHighlightColor: Color = Color.LightGray,
-    activeTextColor: Color = Color.Black,
-    inactiveTextColor: Color = Color.Gray,
-    initialSelectedItemIndex: Int = 0,
-    onNavigateToPokedex: () -> Unit,
-    onNavigateToPokeGame: () -> Unit,
-    onNavigateToGetPokemon: () -> Unit
-
+    navController: NavHostController,
+    state: MutableState<Boolean>,
+    modifier: Modifier = Modifier
 ) {
-    var selectedItemIndex by remember {
-        mutableIntStateOf(initialSelectedItemIndex)
-    }
-    Row(
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.Bottom,
-        modifier = modifier
+    val screens = listOf(
+        Destinations.MyPokedexDestination,
+        Destinations.PokegameDestination,
+        Destinations.PokegameDestination
+    )
+
+    NavigationBar(
+        modifier = modifier,
+        containerColor = Color.White,
     ) {
-        items.forEachIndexed { index, item ->
-            BottomMenuItem(
-                item = item,
-                isSelected = index == selectedItemIndex,
-                activeHighlightColor = activeHighlightColor,
-                activeTextColor = activeTextColor,
-                inactiveTextColor = inactiveTextColor
-            ) {
-                selectedItemIndex = index
-                when (selectedItemIndex) {
-                    0 -> {
-                        onNavigateToPokedex
-                    }
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
 
-                    1 -> {
-                        onNavigateToPokeGame
-                    }
+        screens.forEach { screen ->
 
-                    2 -> {
-                        onNavigateToGetPokemon
+            NavigationBarItem(
+                label = {
+                    Text(text = screen.title)
+                },
+                icon = {
+                    Icon(painterResource(id = screen.icon), contentDescription = screen.title)
+                },
+                selected = currentRoute == screen.route,
+                onClick = {
+                    navController.navigate(screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
                     }
-
-                    else -> {
-                        onNavigateToPokedex
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun BottomMenuItem(
-    item: BottomMenuContent,
-    isSelected: Boolean = false,
-    activeHighlightColor: Color = Color.LightGray,
-    activeTextColor: Color = Color.Black,
-    inactiveTextColor: Color = Color.Gray,
-    onItemClick: () -> Unit
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.clickable {
-            onItemClick()
-        }
-    ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .clip(RoundedCornerShape(10.dp))
-                .background(if (isSelected) activeHighlightColor else Color.Transparent)
-                .padding(10.dp)
-        ) {
-            Icon(
-                painter = painterResource(id = item.iconId),
-                contentDescription = item.title,
-                tint = if (isSelected) activeTextColor else inactiveTextColor,
-                modifier = Modifier.size(20.dp)
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    unselectedTextColor = Color.LightGray, selectedTextColor = Color.Gray
+                ),
             )
         }
-        Text(
-            text = item.title,
-            color = if (isSelected) activeTextColor else inactiveTextColor
-        )
     }
 }
-
-data class BottomMenuContent(
-    val title: String,
-    @DrawableRes val iconId: Int
-)
