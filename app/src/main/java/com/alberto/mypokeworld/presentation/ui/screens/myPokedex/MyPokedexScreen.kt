@@ -1,6 +1,5 @@
-package com.alberto.mypokeworld.presentation.ui.screens.homeScreen
+package com.alberto.mypokeworld.presentation.ui.screens.myPokedex
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +16,11 @@ import com.alberto.mypokeworld.presentation.ui.screens.BottomMenuContent
 
 
 @Composable
-fun HomeScreen() {
+fun MyPokedexScreen(
+    onNavigateToPokedex: () -> Unit,
+    onNavigateToPokeGame: () -> Unit,
+    onNavigateToGetPokemon: () -> Unit
+) {
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -27,7 +30,7 @@ fun HomeScreen() {
         BottomMenu(
             items = listOf(
                 BottomMenuContent("Pokedex", R.drawable.pokedex_icon),
-                BottomMenuContent("Pokegame", R.drawable.pokegame),
+                BottomMenuContent("Pokegame", R.drawable.pokegame_icon),
                 BottomMenuContent("Get Pokemon", R.drawable.pokemon_icon)
             ),
             modifier = Modifier
@@ -36,17 +39,13 @@ fun HomeScreen() {
                 .padding(15.dp)
                 .align(Alignment.BottomCenter),
             onNavigateToPokedex = {
-                //navigate to MyPokedex
-                Log.DEBUG
+                onNavigateToPokedex
             },
             onNavigateToPokeGame = {
-                //navigate to Pokegame
-                Log.DEBUG
-
+                onNavigateToPokeGame
             },
             onNavigateToGetPokemon = {
-                //navigate to Get Pokemon
-                Log.DEBUG
+                onNavigateToGetPokemon
             }
         )
     }

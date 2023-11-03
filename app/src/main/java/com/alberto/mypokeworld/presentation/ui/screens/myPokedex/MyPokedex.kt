@@ -1,4 +1,4 @@
-package com.alberto.mypokeworld.presentation.ui.screens.homeScreen
+package com.alberto.mypokeworld.presentation.ui.screens.myPokedex
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
@@ -36,7 +36,7 @@ fun MyPokedex(
         listOf(
             specie ?: fakeSpecie
         )
-    ) //This will need to change to other data structure to use in the app.
+    ) //This will need to change to a database where we get a list of pokemon already gained.
 
     MyPokedexScreen(
         user, isLoading

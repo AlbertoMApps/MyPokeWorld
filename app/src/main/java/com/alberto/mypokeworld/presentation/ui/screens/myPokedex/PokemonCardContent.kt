@@ -1,4 +1,4 @@
-package com.alberto.mypokeworld.presentation.ui.screens.homeScreen
+package com.alberto.mypokeworld.presentation.ui.screens.myPokedex
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
