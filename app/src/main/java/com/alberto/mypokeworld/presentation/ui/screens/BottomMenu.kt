@@ -24,7 +24,7 @@ fun BottomMenu(
     val screens = listOf(
         Destinations.MyPokedexDestination,
         Destinations.PokegameDestination,
-        Destinations.PokegameDestination
+        Destinations.PokemonExchangeDestination
     )
 
     NavigationBar(
